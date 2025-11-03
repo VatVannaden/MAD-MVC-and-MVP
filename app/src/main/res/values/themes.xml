@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
+        Base application theme.
+        This theme inherits from a Material Components theme (Theme.Material3 is the modern default),
+        which is required for Material components like BottomNavigationView to work correctly.
+        Using a .NoActionBar variant allows you to define your own app bar if needed.
+    -->
+    <style name="Theme.TaskMVC" parent="Theme.Material3.DayNight.NoActionBar">
+        <!--
+            Customize your light theme here.
+            You can define primary colors, secondary colors, font styles, etc.
+        -->
+    </style>
+</resources>

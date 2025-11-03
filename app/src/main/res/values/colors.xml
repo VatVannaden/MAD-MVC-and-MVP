@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="light_purple">#AB94FF</color>
+
+    <color name="status_todo_bg">#C9F8F8</color>
+    <color name="status_todo_text">#0085FF</color>
+    <color name="status_in_progress_bg">#FFF9C4</color>
+    <color name="status_in_progress_text">#F9A825</color>
+    <color name="status_done_bg">#EDE8FF</color>
+    <color name="status_done_text">#5F33E1</color>
+    <color name="purple">#5F33E1</color>
+
+</resources>

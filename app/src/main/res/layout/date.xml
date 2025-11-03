@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="70dp"
+    android:layout_height="90dp"
+    android:gravity="center"
+    android:layout_marginEnd="10dp"
+    android:orientation="vertical"
+    android:background="@drawable/date_bg_inactive" >
+
+    <TextView
+        android:id="@+id/month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="May"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/dayNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="26"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/dayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Mon"
+        android:textSize="12sp" />
+</LinearLayout>
