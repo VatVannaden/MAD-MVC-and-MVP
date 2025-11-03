@@ -1,4 +1,4 @@
-package com.example.taskmvc.View.Adapter;
+package com.example.taskmvp.View.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taskmvc.Model.TaskModel;
-import com.example.taskmvc.R;
+import com.example.taskmvp.Model.TaskModel;
+import com.example.taskmvp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

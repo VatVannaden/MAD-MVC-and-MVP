@@ -1,4 +1,4 @@
-package com.example.taskmvc;
+package com.example.taskmvp;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.taskmvc", appContext.getPackageName());
+        assertEquals("com.example.taskmvp", appContext.getPackageName());
     }
 }

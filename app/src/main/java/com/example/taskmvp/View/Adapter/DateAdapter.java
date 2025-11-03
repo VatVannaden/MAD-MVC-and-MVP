@@ -1,4 +1,4 @@
-package com.example.taskmvc.View.Adapter;
+package com.example.taskmvp.View.Adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taskmvc.R;
+import com.example.taskmvp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,7 +21,7 @@ import java.util.Locale;
 
 public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder> {
 
-    private final List<Date> dateList;
+    private List<Date> dateList;
     private final OnDateClickListener listener;
     private int selectedPosition = -1;
     private Context context;
@@ -34,7 +34,6 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
         this.dateList = dateList;
         this.listener = listener;
 
-        // Set today as initially selected
         Calendar todayCal = Calendar.getInstance();
         for (int i = 0; i < dateList.size(); i++) {
             Calendar itemCal = Calendar.getInstance();
@@ -45,6 +44,29 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
                 break;
             }
         }
+    }
+
+    public void updateDates(List<Date> newDates) {
+        if (this.dateList == null) {
+            this.dateList = newDates;
+        } else {
+            this.dateList.clear();
+            this.dateList.addAll(newDates);
+        }
+
+        Calendar todayCal = Calendar.getInstance();
+        selectedPosition = -1;
+        for (int i = 0; i < dateList.size(); i++) {
+            Calendar itemCal = Calendar.getInstance();
+            itemCal.setTime(dateList.get(i));
+            if (todayCal.get(Calendar.YEAR) == itemCal.get(Calendar.YEAR) &&
+                    todayCal.get(Calendar.DAY_OF_YEAR) == itemCal.get(Calendar.DAY_OF_YEAR)) {
+                this.selectedPosition = i;
+                break;
+            }
+        }
+
+        notifyDataSetChanged();
     }
 
     public void setSelectedDate(Date selectedDate) {
@@ -108,12 +130,13 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
             holder.tvMonthName.setTextColor(ContextCompat.getColor(context, R.color.black));
             holder.tvDate.setTypeface(null, Typeface.NORMAL);
         }
+
         holder.bind(date, listener);
     }
 
     @Override
     public int getItemCount() {
-        return dateList.size();
+        return dateList == null ? 0 : dateList.size();
     }
 
     class DateViewHolder extends RecyclerView.ViewHolder {

@@ -1,4 +1,4 @@
-package com.example.taskmvc.View;
+package com.example.taskmvp.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.taskmvc.R;
-import com.example.taskmvc.View.HomeFragment;
-import com.example.taskmvc.databinding.ActivityMainBinding;
+import com.example.taskmvp.R;
+import com.example.taskmvp.View.HomeFragment;
+import com.example.taskmvp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

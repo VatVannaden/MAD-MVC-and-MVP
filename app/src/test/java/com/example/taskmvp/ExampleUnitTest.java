@@ -1,4 +1,4 @@
-package com.example.taskmvc;
+package com.example.taskmvp;
 
 import org.junit.Test;
 

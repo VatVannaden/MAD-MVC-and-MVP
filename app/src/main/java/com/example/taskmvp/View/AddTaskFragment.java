@@ -1,4 +1,4 @@
-package com.example.taskmvc.View;
+package com.example.taskmvp.View;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -8,20 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.example.taskmvc.Controller.TaskController;
-import com.example.taskmvc.databinding.FragmentAddTaskBinding;
+import com.example.taskmvp.databinding.FragmentAddTaskBinding;
+import com.example.taskmvp.Presenter.AddTaskContract;
+import com.example.taskmvp.Presenter.AddTaskPresenter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class AddTaskFragment extends Fragment {
+public class AddTaskFragment extends Fragment implements AddTaskContract.View {
 
     private FragmentAddTaskBinding binding;
     private long startTimeMillis = -1;
     private long endTimeMillis = -1;
-    private TaskController controller;
+    private AddTaskContract.Presenter presenter;
+
     private OnFragmentInteractionListener mListener;
 
     public interface OnFragmentInteractionListener {
@@ -42,35 +45,26 @@ public class AddTaskFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAddTaskBinding.inflate(inflater, container, false);
-
-        controller = new TaskController();
+        presenter = new AddTaskPresenter();
+        presenter.attachView(this);
 
         setupGroupSpinner();
         setupDatePickers();
-        setupClickListeners();
+
+        binding.createTaskBtn.setOnClickListener(v -> handleSaveTask());
+        binding.imageView3.setOnClickListener(v -> presenter.onCancelClicked());
 
         return binding.getRoot();
     }
 
-    private void setupClickListeners() {
-        binding.createTaskBtn.setOnClickListener(v -> handleSaveTask());
-        binding.imageView3.setOnClickListener(v -> {
-            if (mListener != null) {
-                mListener.onCancelPressed();
-            }
-        });
-    }
     private void handleSaveTask() {
-        String taskName = binding.etTaskName.getText().toString().trim();
+        String title = binding.etTaskName.getText().toString().trim();
         String description = binding.etTaskDescription.getText().toString().trim();
         String group = binding.spinnerGroup.getSelectedItem().toString();
 
-        boolean wasSaved = controller.saveTask(getContext(), taskName, description, group, startTimeMillis, endTimeMillis);
-
-        if (wasSaved && mListener != null) {
-            mListener.onTaskSaved();
-        }
+        presenter.saveTask(title, description, group, startTimeMillis, endTimeMillis);
     }
+
 
     private void setupGroupSpinner() {
         String[] groups = {"Work", "Study", "Entertainment", "Personal"};
@@ -109,8 +103,30 @@ public class AddTaskFragment extends Fragment {
     }
 
     @Override
+    public void showValidationError(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTaskSavedSuccess() {
+        Toast.makeText(getContext(), "Task added successfully!", Toast.LENGTH_SHORT).show();
+        // Use listener to tell the Activity to close this fragment
+        if (mListener != null) {
+            mListener.onTaskSaved();
+        }
+    }
+
+    @Override
+    public void closeView() {
+        if (mListener != null) {
+            mListener.onCancelPressed();
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
+        presenter.detachView();
         binding = null;
     }
 }

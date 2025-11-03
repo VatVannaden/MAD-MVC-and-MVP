@@ -1,12 +1,12 @@
-package com.example.taskmvc.View;
+package com.example.taskmvp.View;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.taskmvc.R;
-import com.example.taskmvc.View.AddTaskFragment;
+import com.example.taskmvp.R;
+import com.example.taskmvp.View.AddTaskFragment;
 
 public class AddTaskActivity extends AppCompatActivity implements AddTaskFragment.OnFragmentInteractionListener {
 
